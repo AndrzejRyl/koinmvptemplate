@@ -1,0 +1,155 @@
+//PLUGINS
+buildscript {
+  repositories {
+    maven { url CustomRepositories.fabric }
+  }
+  dependencies {
+    //noinspection GradleDynamicVersion
+    //warning appears, because of fabric:
+    //https://github.com/firebase/firebase-android-sdk/issues/198#issuecomment-458756047
+    classpath ClassPaths.fabric
+  }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'io.fabric'
+
+android {
+  compileSdkVersion Versions.compileSdk
+  buildToolsVersion Versions.buildTools
+
+  defaultConfig {
+    applicationId "com.andrzejryl.kointemplate"
+    minSdkVersion Versions.minSdk
+    targetSdkVersion Versions.targetSdk
+    versionCode 1
+    versionName "1.0"
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+  }
+
+  sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+    debug.java.srcDirs += 'src/debug/kotlin'
+    release.java.srcDirs += 'src/release/kotlin'
+    test.java.srcDirs += 'src/test/kotlin'
+    androidTest.java.srcDirs += 'src/androidTest/kotlin'
+    main.res.srcDirs += [
+            'src/main/res/layouts/activity',
+            'src/main/res/layouts/fragment',
+            'src/main/res/layouts/view',
+            'src/main/res/layouts/include',
+            'src/main/res/layouts/item'
+    ]
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+}
+
+configurations {
+  ktlint
+}
+
+task ktlint(type: JavaExec, group: "verification") {
+  description = "Check Kotlin code style."
+  classpath = configurations.ktlint
+  main = "com.github.shyiko.ktlint.Main"
+  args "src/**/*.kt"
+  args "--reporter=checkstyle,output=${project.rootDir}/config/checkstyle/ktlint.xml"
+}
+
+dependencies {
+  /**
+   * KOTLIN
+   */
+  implementation Libs.kotlinStdlib
+  ktlint Libs.ktlint
+
+  /**
+   * ANDROID SUPPORT
+   */
+  implementation UILibs.supportAppcompat
+
+  /**
+   * VIEWS
+   */
+  implementation UILibs.constraintLayout
+
+  /**
+   * DEPENDENCY INJECTION
+   */
+  implementation Libs.koin
+  testImplementation TestLibs.koin
+
+  /**
+   * NETWORK LAYER
+   */
+  implementation Libs.okHttp
+  implementation Libs.retrofit
+  implementation Libs.retrofitAdapter
+  implementation Libs.retrofitConverter
+  implementation Libs.retrofitScalarConverter
+
+  /**
+   * RX JAVA 2
+   */
+  implementation Libs.rxAndroid
+  implementation Libs.rxJava
+
+  /**
+   * DATA PERSISTENCE
+   */
+  implementation Libs.room
+  implementation Libs.roomRxJava
+  androidTestImplementation TestLibs.room
+
+  /**
+   * IMAGE PROCESSING
+   */
+  implementation UILibs.glide
+  annotationProcessor UILibs.glideAnnotations
+
+  /**
+   * ANALYTICS
+   */
+  implementation Libs.firebase
+  implementation(Libs.crashlytics) {
+    transitive = true
+  }
+
+  /**
+   * APP PERFORMANCE
+   */
+  debugImplementation Libs.leakCanary
+
+  /**
+   * TESTS
+   */
+  testImplementation TestLibs.junit
+  testImplementation TestLibs.mockito
+  testImplementation TestLibs.kotlinMockito
+  androidTestImplementation TestLibs.espresso
+  androidTestImplementation TestLibs.espressoContrib
+  androidTestImplementation TestLibs.testRunner
+
+  /**
+   * SEPARATED MODULES FROM THE PROJECT
+   */
+  implementation project(':core')
+
+  /**
+   * GOOGLE SERVICES PLUGIN (must be at the end)
+   */
+  apply plugin: 'com.google.gms.google-services'
+}

@@ -1,0 +1,29 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+  repositories {
+    maven { url CustomRepositories.google }
+    maven { url CustomRepositories.jcenter }
+  }
+  dependencies {
+    classpath ClassPaths.gradlePlugin
+    classpath ClassPaths.kotlinGradlePlugin
+    classpath ClassPaths.gradleVersionsPlugin
+    classpath ClassPaths.googleServices
+    classpath ClassPaths.kotlinExtensions
+    // NOTE: Do not place your application dependencies here; they belong
+    // in the individual module build.gradle files
+  }
+}
+
+allprojects {
+  repositories {
+    flatDir { dirs 'libs' }
+    maven { url CustomRepositories.fabric }
+    maven { url CustomRepositories.google }
+    maven { url CustomRepositories.jcenter }
+  }
+}
+
+task clean(type: Delete) {
+  delete rootProject.buildDir
+}
