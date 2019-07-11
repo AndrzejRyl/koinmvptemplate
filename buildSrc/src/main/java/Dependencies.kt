@@ -5,19 +5,19 @@ object Versions {
   const val targetSdk = 29
 
   // Main dependencies
-  const val gradle = "3.4.0"
-  const val kotlin = "1.3.30"
-  const val gradleVersionsPlugin = "0.20.0"
+  const val gradle = "3.4.2"
+  const val kotlin = "1.3.41"
+  const val gradleVersionsPlugin = "0.21.0"
 
   // Plugins
   const val googleServices = "4.2.0"
 
   // Test dependencies
   const val junit = "4.12"
-  const val mockito = "2.23.4"
+  const val mockito = "3.0.0"
   const val kotlinMockito = "2.0.0-alpha03"
   const val androidTestSupport = "1.1.0"
-  const val leakCanary = "1.6.2"
+  const val leakCanary = "1.6.3"
   const val espresso = "3.1.0"
 
   // UI dependencies
@@ -26,18 +26,18 @@ object Versions {
 
   // Main libraries dependencies
   const val fabric = "1.+"
-  const val room = "2.0.0"
-  const val rxJava = "2.2.4"
-  const val rxAndroid = "2.1.0"
-  const val koin = "1.0.2"
-  const val retrofit = "2.5.0"
-  const val okHttp = "3.14.2"
-  const val crashlytics = "2.9.7@aar"
-  const val firebase = "16.0.8"
+  const val room = "2.1.0"
+  const val rxJava = "2.2.10"
+  const val rxAndroid = "2.1.1"
+  const val koin = "2.0.1"
+  const val retrofit = "2.6.0"
+  const val okHttp = "4.0.1"
+  const val crashlytics = "2.10.1@aar"
+  const val firebase = "17.0.0"
 
   // Others
   const val glide = "4.9.0"
-  const val ktlint = "0.29.0"
+  const val ktlint = "0.33.0"
 }
 
 object CustomRepositories {
