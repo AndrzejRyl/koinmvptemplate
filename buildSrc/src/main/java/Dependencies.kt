@@ -34,6 +34,7 @@ object Versions {
   const val okHttp = "4.0.1"
   const val crashlytics = "2.10.1@aar"
   const val firebase = "17.0.0"
+  const val remoteConfig = "18.0.0"
 
   // Others
   const val glide = "4.9.0"
@@ -77,6 +78,7 @@ object Libs {
 
   const val crashlytics = "com.crashlytics.sdk.android:crashlytics:${Versions.crashlytics}"
   const val firebase = "com.google.firebase:firebase-core:${Versions.firebase}"
+  const val remoteConfig = "com.google.firebase:firebase-config:${Versions.remoteConfig}"
 
   // Others
   const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"

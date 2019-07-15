@@ -14,5 +14,6 @@ val applicationModule = module {
 
 val koinMvpTemplateModules = listOf(
         applicationModule,
-        databaseModule
+        databaseModule,
+        servicesModule
 )
